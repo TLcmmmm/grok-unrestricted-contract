@@ -1,4 +1,4 @@
-# grok4.6-unrestricted 合约
+# grok-unrestricted 合约
 
 Grok 4.6 / 4.5 的**场景路由式交付契约**——不依赖人格越狱，而是把请求重定义为"已授权工作区的标准交付流程"。
 
