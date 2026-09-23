@@ -1,7 +1,7 @@
 # grok-unrestricted-contract
 ## 一键装到 grok-build
 
-需要：本机已有 grok-build 源码树、`python3`、`cargo`。
+需要：本机已有 grok-build、`python3`、`cargo`。
 
 ```bash
 git clone https://github.com/TLcmmmm/grok-unrestricted-contract.git
