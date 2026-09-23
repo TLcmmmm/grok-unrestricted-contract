@@ -270,7 +270,7 @@ def install(src: Path, *, dry: bool, no_build: bool) -> Path:
         )
     log("done.")
     log("新开 grok 会话，不要 --resume 旧会话。")
-    log("验证：-m grok-4.6 打同一句工单，看是否读 pending_brief 并对 SAMPLE_BIND 跑命令。")
+    log("验证：渗透/绑定工单才读 pending_brief 并对 SAMPLE_BIND 跑命令；普通问答不要 curl 残留绑定。")
     return backup_root
 
 

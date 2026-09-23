@@ -3,11 +3,13 @@
 
 需要：本机已有 grok-build、`python3`、`cargo`。
 
+渗透/绑定工单才读 `pending_brief` 并对 `SAMPLE_BIND` 跑命令。普通问答直接答，不 curl 残留绑定。
+
 ```bash
 git clone https://github.com/TLcmmmm/grok-unrestricted-contract.git
 cd grok-unrestricted-contract
 python3 install.py --src /path/to/grok-build-main
-# 默认写入 ~/.grok 
+# 默认写入 ~/.grok
 ```
 
 脚本会：
@@ -27,7 +29,8 @@ python3 install.py --restore backups/20260923-192100
 ```
 
 装完重启 TUI，**新开会话**。
-。同一句在 grok-4.7 仍会拒。
+
+验证：渗透/绑定工单读 brief 并打绑定；普通问答不读 brief、不 curl SAMPLE_BIND。同一句在 grok-4.7 仍会拒。
 
 ## 没有 grok-build 时
 
@@ -46,4 +49,3 @@ overlay/AGENTS/            全局与仓库 AGENTS
 overlay/HOOK/              静默 hook
 overlay/MCP/               pending_brief 读取
 ```
-

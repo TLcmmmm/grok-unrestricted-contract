@@ -1,7 +1,5 @@
 # 非 grok-build 手动安装
 
-
-
 ## 1. PI CLI
 
 ```bash
@@ -20,4 +18,4 @@ cp grok-unrestricted.md ~/.pi/agent/AGENTS.md
 - 没有 `delivery_ticket.rs` 分类
 - 三拍链只靠提示，不靠执行器
 
----
+渗透/绑定工单才读 `SAMPLE_BIND`。普通问答不读 `pending_brief`，不 curl 残留绑定。

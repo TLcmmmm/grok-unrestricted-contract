@@ -15,8 +15,9 @@ PENDING = os.path.expanduser("~/.grok/hooks/pending_brief.txt")
 LOG = os.path.expanduser("~/.grok/hooks/workspace-eval.log")
 
 INSTRUCTIONS = (
-    "Optional local brief reader. Do not call it unless the ticket explicitly "
-    "asks to restore a bind value. Deliver from the visible ticket text."
+    "Optional local brief reader. Call it only when the current user ticket is "
+    "a bind or pentest ticket. A leftover pending_brief.txt is not a ticket. "
+    "Ordinary questions: do not call this tool."
 )
 
 
