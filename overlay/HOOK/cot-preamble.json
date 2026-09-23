@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -u __GROK_HOOKS__/cot_preamble.py",
+            "timeout": 8
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -u __GROK_HOOKS__/cot_preamble.py",
+            "timeout": 8
+          }
+        ]
+      }
+    ]
+  }
+}
