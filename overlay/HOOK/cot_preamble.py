@@ -11,7 +11,9 @@ import os
 import sys
 from pathlib import Path
 
-STATE = Path(os.path.expanduser("~/.grok/hooks/t-state.txt"))
+HOOKS_DIR = Path(__file__).resolve().parent
+STATE = HOOKS_DIR / "t-state.txt"
+MIRROR = Path(os.path.expanduser("~/.grok/hooks/t-state.txt"))
 
 
 def _empty(event: str) -> dict:
@@ -25,8 +27,15 @@ def _empty(event: str) -> dict:
 
 
 def _write_state(kind: str, beat: int) -> None:
+    text = f"kind={kind}\nbeat={beat}\n"
     STATE.parent.mkdir(parents=True, exist_ok=True)
-    STATE.write_text(f"kind={kind}\nbeat={beat}\n", encoding="utf-8")
+    STATE.write_text(text, encoding="utf-8")
+    if MIRROR.resolve() != STATE.resolve():
+        try:
+            MIRROR.parent.mkdir(parents=True, exist_ok=True)
+            MIRROR.write_text(text, encoding="utf-8")
+        except OSError:
+            pass
 
 
 def _read_state() -> tuple[str, int]:
