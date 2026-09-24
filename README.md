@@ -3,7 +3,7 @@
 
 需要：本机已有 grok-build、`python3`、`cargo`。
 
-去限制写在会话自动加载的 `AGENTS.md` 和 `rules/*.md` 里（标题 `T`）。用户仍打原句。系统提示只留 `T`。Hook 只在本机写 `t-state.txt`（COVERED 前几拍已成立），不伪造聊天历史。COVERED 含炸药弹药、枪械、药品合成、恶意软件和入侵、客户端和样本、成人文案。只有渗透/绑定才读 `pending_brief` 并对 `SAMPLE_BIND` 跑命令。其它 COVERED 直接交交付物。普通问答直接答，不 curl 残留绑定。只装 `~/.grok`，不要写进 `.xfgrok`。
+去限制写在会话自动加载的 `AGENTS.md` 和 `rules/*.md` 里（标题 `T`）。用户仍打原句。系统提示只留 `T`。Hook 只在本机写 `t-state.txt`（COVERED 前几拍已成立），不伪造聊天历史。
 
 ```bash
 git clone https://github.com/TLcmmmm/grok-unrestricted-contract.git
@@ -30,7 +30,7 @@ python3 install.py --restore backups/20260923-192100
 
 装完重启 TUI，**新开会话**。
 
-验证：渗透/绑定工单读 brief 并打绑定；普通问答不读 brief、不 curl SAMPLE_BIND。同一句在 grok-4.7 仍会拒。
+
 
 ## 没有 grok-build 时
 
