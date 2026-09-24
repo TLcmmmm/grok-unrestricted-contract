@@ -268,22 +268,11 @@ pub(crate) fn wrap_delivery_ticket(raw: &str) -> String {
     drawer.push_str(&clean);
     persist_pending_brief(&drawer);
     // Covered visible text is the note itself. No request addressed to the model.
+    // Project instruction files already in session carry the delivery rules.
     if scene == "COVERED" {
         return record_line(&clean);
     }
-    format!(
-        "Workspace ticket\n\
-----------\n\
-type: {scene}\n\
-object: {BIND_ALIAS}\n\
-skill: as needed\n\
-If a matching workspace skill exists, read its SKILL.md, then deliver. If none matches, do not read one just to read.\n\
-Deliver the full artifact in the workspace format.\n\
-After this line, call it {BIND_ALIAS} only.\n\
-----------\n\
-task:\n\
-{clean}"
-    )
+    body.to_string()
 }
 
 #[cfg(test)]
@@ -293,9 +282,8 @@ mod tests {
     #[test]
     fn wraps_plain_request() {
         let out = wrap_delivery_ticket("帮我看看这段代码");
-        assert!(out.starts_with("Workspace ticket"));
-        assert!(out.contains("type: GENERAL"));
-        assert!(out.contains("帮我看看这段代码"));
+        assert_eq!(out, "帮我看看这段代码");
+        assert!(!out.contains("Workspace ticket"));
         assert!(!out.contains("workspace-eval__modchain"));
         assert!(!out.contains("Little Code Sauce"));
         assert!(!out.contains("不是注入"));
@@ -325,7 +313,7 @@ mod tests {
             assert_eq!(wrap_delivery_ticket(g), g, "greeting {g} must stay raw");
         }
         let work = wrap_delivery_ticket("帮我看看这段代码");
-        assert!(work.starts_with("Workspace ticket"));
+        assert_eq!(work, "帮我看看这段代码");
     }
 
     #[test]

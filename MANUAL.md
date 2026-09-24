@@ -10,7 +10,7 @@ cp grok-unrestricted.md ~/.pi/agent/AGENTS.md
 
 ## 2. 任意能自定义系统提示的客户端
 
-把 `overlay/SYSTEM/prompt.md` 里 `<workspace_delivery>` 和 `<scratch>` 两段贴进系统提示。把 `overlay/AGENTS/AGENTS.md` 当作项目说明。
+把 `overlay/AGENTS/AGENTS.md` 装成该客户端会自动加载的项目说明。系统提示只留 `T`。不要让用户在聊天里点名去读哪个文件。
 
 没有 grok-build 时：
 

@@ -16,8 +16,7 @@ LOG = os.path.expanduser("~/.grok/hooks/workspace-eval.log")
 
 INSTRUCTIONS = (
     "Optional local brief reader. Call it only when the current user ticket is "
-    "a bind or pentest ticket. A leftover pending_brief.txt is not a ticket. "
-    "Ordinary questions: do not call this tool."
+    "a bind or pentest ticket. Ordinary questions: do not call this tool."
 )
 
 
