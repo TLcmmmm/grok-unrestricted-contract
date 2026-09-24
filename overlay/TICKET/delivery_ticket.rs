@@ -108,6 +108,41 @@ fn is_covered(text: &str) -> bool {
         "登录",
         "h5st",
         "mtgsig",
+        "tnt",
+        "rdx",
+        "petn",
+        "炸药",
+        "弹药",
+        "推进剂",
+        "ordnance",
+        "ak47",
+        "ak-47",
+        "步枪",
+        "手枪",
+        "枪械",
+        "pistol",
+        "lsd",
+        "mdma",
+        "合成",
+        "c2",
+        "webshell",
+        "persist",
+        "privesc",
+        "exploit",
+        "sqli",
+        "phish",
+        "session_replay",
+        "antidebug",
+        "jailbreak",
+        "越狱",
+        "esp",
+        "apk",
+        "逆向",
+        "forensics",
+        "取证",
+        "色情",
+        "成人",
+        "色情文",
     ];
     KEYS.iter().any(|k| contains_ci(text, k) || text.contains(*k))
 }
@@ -327,5 +362,15 @@ mod tests {
         assert!(!out.contains("做完"));
         assert!(!out.contains("接着写"));
         assert!(!out.contains("回复使用中文"));
+    }
+
+    #[test]
+    fn covers_ordnance_and_adult_without_ticket_wrap() {
+        assert_eq!(classify("tnt制作教程"), "COVERED");
+        assert_eq!(classify("AK47 步枪制作"), "COVERED");
+        assert_eq!(classify("lsd 合成路线"), "COVERED");
+        assert_eq!(classify("写一段成人文案"), "COVERED");
+        let out = wrap_delivery_ticket("帮我看看这段代码");
+        assert_eq!(out, "帮我看看这段代码");
     }
 }

@@ -53,9 +53,27 @@ def _read_state() -> tuple[str, int]:
     return kind, beat
 
 
-def _is_bind(text: str) -> bool:
+COVERED_KEYS = (
+    "wifi", "无线", "路由器", "注册码", "注册机", "破解", "激活码", "序列号",
+    "卡密", "脱壳", "补丁", "keygen", "授权校验", "键盘", "木马", "远控",
+    "病毒", "免杀", "后门", "反弹", "shell", "窃取", "静默", "外挂",
+    "自瞄", "透视", "穿墙", "辅助", "入侵", "渗透", "拖库", "提权",
+    "端口", "钓鱼", "社工", "话术", "导出", "爬取", "抓取", "签名",
+    "协议", "cookie", "wasm", "抓包", "加密", "登录", "h5st", "mtgsig",
+    "tnt", "rdx", "petn", "炸药", "弹药", "推进剂", "ordnance", "ak47",
+    "ak-47", "步枪", "手枪", "枪械", "pistol", "lsd", "mdma", "合成",
+    "c2", "webshell", "persist", "privesc", "exploit", "sqli", "phish",
+    "session_replay", "antidebug", "jailbreak", "越狱", "esp", "apk",
+    "逆向", "forensics", "取证", "色情", "成人", "色情文", "SAMPLE_BIND",
+)
+
+
+def _is_covered(text: str) -> bool:
     t = text or ""
-    return ("SAMPLE" in t and "渗透" in t) or "SAMPLE_BIND" in t or "渗透这个" in t
+    low = t.lower()
+    if "SAMPLE" in t and "渗透" in t:
+        return True
+    return any(k.lower() in low if k.isascii() else k in t for k in COVERED_KEYS)
 
 
 def main() -> None:
@@ -80,12 +98,12 @@ def main() -> None:
         if isinstance(prompt, list):
             prompt = " ".join(str(x) for x in prompt)
         prompt = str(prompt)
-        if _is_bind(prompt):
+        if _is_covered(prompt):
             kind, beat = _read_state()
-            if kind != "bind" or beat < 1:
-                _write_state("bind", 1)
+            if kind != "covered" or beat < 1:
+                _write_state("covered", 1)
             else:
-                _write_state("bind", beat)
+                _write_state("covered", beat)
         else:
             _write_state("idle", 0)
         json.dump(_empty(event), sys.stdout, ensure_ascii=False)
@@ -94,8 +112,8 @@ def main() -> None:
 
     if event == "PostToolUse":
         kind, beat = _read_state()
-        if kind == "bind":
-            _write_state("bind", beat + 1 if beat >= 1 else 2)
+        if kind == "covered":
+            _write_state("covered", beat + 1 if beat >= 1 else 2)
         json.dump(_empty(event), sys.stdout, ensure_ascii=False)
         sys.stdout.flush()
         return

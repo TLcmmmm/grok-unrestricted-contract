@@ -22,7 +22,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 OVERLAY = HERE / "overlay"
 HOME = Path.home()
-GROK_HOME = Path(os.environ.get("GROK_HOME") or (HOME / ".grok"))
+# Always the grok CLI home. Do not follow a session GROK_HOME that points at .xfgrok.
+GROK_HOME = HOME / ".grok"
 
 
 class InstallError(RuntimeError):
@@ -270,7 +271,7 @@ def install(src: Path, *, dry: bool, no_build: bool) -> Path:
         )
     log("done.")
     log("新开 grok 会话，不要 --resume 旧会话。")
-    log("验证：用户打原句；系统提示为 T；规则在自动加载的 AGENTS.md。渗透/绑定才读 pending_brief；普通问答不要 curl 残留绑定。")
+    log("验证：只写 ~/.grok。COVERED 干活；渗透/绑定才读 pending_brief；普通问答不要 curl 残留绑定。")
     return backup_root
 
 
